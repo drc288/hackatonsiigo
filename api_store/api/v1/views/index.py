@@ -282,5 +282,5 @@ class SaleList(Resource):
 api.add_resource(Sale, "/sale/<int:sale_id>")
 api.add_resource(SaleList, '/sales')
 
-app.run(debug=True,host="0.0.0.0")
+app.run(debug=True,host="0.0.0.0", port=5002)
  
