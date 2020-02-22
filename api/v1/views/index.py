@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-Flask route that returns json status response 
+this file has the end point route
 """
 from api.v1.views import app_views
-from flask import jsonify, request
-from models import storage
+from flask import jsonify, request, abort, make_response
+import requests
+import time
 
 @app_views.route('/status', methods=["GET"])
 def json_status():
@@ -42,7 +43,7 @@ def authentification():
     return jsonify(res.json())
     
 
-@app_views.route('/inventory', methods=["POST"], strict_slashes=False)
+@app_views.route('/project', methods=["POST"], strict_slashes=False)
 def project():
     """
     return a dictionary that containt the project
@@ -56,12 +57,12 @@ def project():
     if data.get('auth_token') is None:
         abort(400, 'Missing token')
 #
-    project = requests.get('https:///' + data.get('project_id') + '.json?auth_token=' + data.get('auth_token'))
+    project = requests.get('https://intranet.hbtn.io/projects/' + data.get('project_id') + '.json?auth_token=' + data.get('auth_token'))
     #  
     return jsonify(project.json())
     
     
-@app_views.route('/invoice', methods=["POST"], strict_slashes=False)
+@app_views.route('/task', methods=["POST"], strict_slashes=False)
 def task():
     """
     """
@@ -85,3 +86,4 @@ def task():
             return jsonify(result.json())
         else:
             pass
+
