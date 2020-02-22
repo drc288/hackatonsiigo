@@ -43,7 +43,7 @@ python-apt===0.9.3.5ubuntu3
 python-dateutil==2.8.1
 python-debian===0.1.21-nmu2ubuntu2
 python-editor==1.0.4
-PyYAML==3.10
+PyYAML==5.1
 requests==2.22.0
 SecretStorage==2.0.0
 simplejson==3.3.1
