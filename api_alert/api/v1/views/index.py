@@ -24,7 +24,6 @@ def companies():
   
     return jsonify(res.json())
 
-@app_views.route('/companies/<id>/products', )
-    
+# @app_views.route('/companies/<id>/products', )
     
     
