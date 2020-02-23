@@ -19,11 +19,22 @@ def json_status():
 def companies():
     """
     It will list all the companies that we get from a microservice
+    return: a JSON
     """
     res = requests.get('http://0.0.0.0:5002/companies')
   
     return jsonify(res.json())
 
-# @app_views.route('/companies/<id>/products', )
+@app_views.route('/companies/<id>/products',methods=["GET"], strict_slashes=False)
+def companies_by_id(id):
+    """
+    it will list companies by ide
+    Return:
+    """
+    #print(id)
+    #return 'hola'
+    res = requests.get('http://0.0.0.0:5002/company/{}/products'.format(id))
+    #return res
+    return jsonify(res.json())
     
     
