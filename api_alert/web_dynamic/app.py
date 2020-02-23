@@ -21,4 +21,4 @@ def companies():
 if __name__ == "__main__":
     """
     MAIN Flask App"""
-    app.run(host=host, port=port)
+    app.run(host=host, port=port, use_reloader=False)
