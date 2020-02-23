@@ -15,75 +15,16 @@ def json_status():
     
     return jsonify({"status": "OK"})
 
-
-@app_views.route('/auth', methods=["POST"], strict_slashes=False)
-def authentification():
+@app_views.route('/companies', methods=["GET"], strict_slashes=False)
+def companies():
     """
-    will request the auth_token
+    It will list all the companies that we get from a microservice
     """
-    data = request.get_json()
-    if data is None:
-        abort(400, 'Not a JSON')
-    if data.get('code_id') is None:
-        abort(400, 'Missing code id')
-    if data.get('password') is None:
-        abort(400, 'Missing password')
-    if data.get('api_key') is None:
-        abort(400, 'Missing API_KEY')
-    data = {
-            'api_key': data.get('api_key'),
-            'email': str(data.get('code_id')) + '@holbertonschool.com',
-            'password': data.get('password'),
-            'scope': 'checker' 
-    }
-    
-    res = requests.post('https://intranet.hbtn.io/users/auth_token.json', data=data)
-    token = res.json().get('auth_token')
-        
+    res = requests.get('http://0.0.0.0:5002/companies')
+  
     return jsonify(res.json())
-    
 
-@app_views.route('/project', methods=["POST"], strict_slashes=False)
-def project():
-    """
-    return a dictionary that containt the project
-    """
-    # id project
-    data = request.get_json()
-    if data is None:
-        abort(400, 'Not a JSON')
-    if data.get('project_id') is None:
-        abort(400, 'Missing data')
-    if data.get('auth_token') is None:
-        abort(400, 'Missing token')
-#
-    project = requests.get('https://intranet.hbtn.io/projects/' + data.get('project_id') + '.json?auth_token=' + data.get('auth_token'))
-    #  
-    return jsonify(project.json())
+@app_views.route('/companies/<id>/products', )
     
     
-@app_views.route('/task', methods=["POST"], strict_slashes=False)
-def task():
-    """
-    """
-    data = request.get_json()
-    if data is None:
-        abort(400, 'Not a JSON')
-    if data.get('task_id') is None:
-        abort(400, 'Missing task')
-    if data.get('auth_token') is None:
-        abort(400, 'Missing token')
-#
-    check = requests.post('https://intranet.hbtn.io/tasks/' + data.get('task_id') + '/start_correction.json?auth_token=' + str(data.get('auth_token')))
-
-    while True:
-        time.sleep(2)
-        result = requests.get('https://intranet.hbtn.io/correction_requests/' + str(check.json().get('id')) + '.json?auth_token=' + str(data.get('auth_token')))
-        
-        if (result.json().get('status') == 'Done'):
-            return jsonify(result.json())
-        elif (result.json().get('status') == 'Fail'):
-            return jsonify(result.json())
-        else:
-            pass
-
+    
