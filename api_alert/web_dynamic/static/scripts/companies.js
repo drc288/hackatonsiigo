@@ -1,41 +1,77 @@
-function init(){
-    console.log('checker1');
+const url = 'http://192.168.33.100:5001/api/v1';
 
-    if (!localStorage.getItem('key')){
-        location.href="registration";
-    }
 
-    $('#form_checker1').submit(function(event){
-        event.preventDefault();
-        
-        const key = localStorage.getItem('key');
-        const project_id = $('#project_id').val();
-        console.log(project_id)
-        if(!project_id){
-            return;
-        }
+function inputCompaniesHtml(companie) {
+	const html = ['<option value="'+companie.company_id+'">', companie.name, '</option>'];
 
-        console.log(key);
-        console.log(project_id);
-        
-        const data = {
-            'project_id' : project_id,
-            'auth_token' : key
-        }
-
-        $.ajax({
-            'url':'http://192.168.33.12:5000/api/v1/project',
-            'method':'POST',
-            'contentType':'application/json',
-            'data': JSON.stringify(data),
-        }).done(function(data){
-            console.log(data);
-
-            localStorage.setItem('project', JSON.stringify(data));
-
-            location.href="tasks"
-        })
-    })
+	return html.join('');
 }
+
+function addCompanies(data) {
+	const options = [];
+	data.forEach(function(companie){
+		options.push(inputCompaniesHtml(companie));
+	})
+
+	$('select').append(options.join(''));
+}
+
+function getCompanies() {
+	const request = {
+		url: url + '/companies'
+	}
+	const r = $.ajax(request)
+
+	r.done(function(data) {
+		addCompanies(data);
+	})
+
+	r.fail(function(jqXHR, textStatus, errorThrown) {
+	
+	})
+}
+
+function htmlProducts(product) {
+  console.log(product);
+  const html = ['<tr>',
+                '<td>',product.name,'</td>', 
+                '<td><input type="number" data-id="'+product.product_id+'"></td>',
+                '<td>','<button type="submit" class="btn btn-primary mb-2">Add</button>','</td>',
+                '</tr>']
+
+  return html.join('');
+}
+
+function addProducts(products) {
+  products.forEach(function(product){
+    $('TBODY').append(htmlProducts(product));
+  })
+}
+
+function getProducts(company_id) {
+  const request = {
+    url: url + '/company/'+company_id+'/products'
+  }
+  const r = $.ajax(request);
+
+  r.done(function(data) {
+    $('TBODY').html('');
+    addProducts(data);
+  })
+
+  r.fail(function(data) {
+
+  })
+}
+
+function init(){
+  console.log('init');
+  getCompanies();
+}
+
+$(document).on('change', 'SELECT', function(){
+  console.log($(this).val());
+  getProducts($(this).val());
+});
 
 $(document).ready(init);

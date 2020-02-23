@@ -2,16 +2,18 @@
 """
 This file will start an API
 """
-from api.v1.views import app_views
+
 from flask import jsonify, make_response
 from flask import Flask
 from flask_cors import CORS
+from flask_restful import Api, Resource, reqparse
+
 
 app = Flask(__name__)
-app.register_blueprint(app_views)
+api = Api(app)
 
 host="0.0.0.0"
-port="5001"
+port="5000"
 
 
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
@@ -46,4 +48,4 @@ def not_found(err):
 
 
 if __name__ == '__main__':
-    app.run(host=host, port=port, threaded=True, use_reloader=False)
+    app.run(host=host, port=port, threaded=True)
