@@ -2,3 +2,38 @@
   padding: 0%;
   margin: 0%;
 }
+
+form.first-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.container label {
+    display: flex;
+    order: 1;
+    font-size: 22px;
+    justify-content: center;
+}
+
+div.container form.first-form .form-control{
+    order: 2;
+    width: 700px;
+    margin-bottom: 20px;
+    margin-left: 120px;
+}
+
+div.container form.first-form button {
+    margin-top: 25px;
+    width: 700px;
+    margin-left: 120px;
+    order: 3;
+}

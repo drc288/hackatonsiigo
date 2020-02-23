@@ -21,25 +21,49 @@
 
 <body>
   <header>
-    Header
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">Super Event Hub</a>
+    </nav>
   </header>
-  <hr>
-  <div class=containser>
-    <h1>Super Event Hub</h1>
-    <form>
-      <label for="exampleFormControlSelect1">Example select</label>
+  <div class=container>
+    <form class="first-form">
+      <label for="exampleFormControlSelect1"><b>Select your provider</b></label>
       <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
+        <option>Burger King</option>
       </select>
-      <hr>
       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Search product">
-      <button type="submit" class="btn btn-primary mb-2">Add</button>
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
     </form>
+    <hr>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Quantity to select</th>
+          <th scope="col">Add</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mark</td>
+          <td>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </td>
+          <td>
+            <button type="submit" class="btn btn-primary mb-2">Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <hr>
-  <footer>
-    footer
+  <footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">Super Event Hub:
+      <a href="https://github.com/drc288/hackatonsiigo"> Hackaton Siigo</a>
+    </div>
   </footer>
 </body>
 
