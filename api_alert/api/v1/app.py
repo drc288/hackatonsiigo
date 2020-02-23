@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 host="0.0.0.0"
-port="5000"
+port="5001"
 
 
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
