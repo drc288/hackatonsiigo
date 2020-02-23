@@ -25,7 +25,7 @@ def companies():
   
     return jsonify(res.json())
 
-@app_views.route('/companies/<id>/products',methods=["GET"], strict_slashes=False)
+@app_views.route('/company/<id>/products',methods=["GET"], strict_slashes=False)
 def companies_by_id(id):
     """
     it will list companies by ide
